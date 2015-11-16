@@ -145,41 +145,17 @@ function getPosition(element) {
 }
 
 function $(selector) {
-  var se_type = "";
   if(typeof selector !== "string") return;
-  var selector_0 = selector[0], selec_sub = selector.substr(1);
-  if( selector_0 === "#") {
-    se_type = "id";
-  } else if(selector_0 === ".") {
-    se_type = "class";
-  } else if(selector_0 === "[") {
-    se_type = "attr";
-  } else {
-    se_type = "tag";
+  if( /^#([\w-]+)$/.test( selector ) ) {
+    return document.getElementById(selector.substr(1));
+  } else if ( /^\w+$/.test( selector ) ) {
+    return document.getElementsByTagName(selector);
+  } 
+  try {
+    return document.querySelectorAll(selector);
+  } catch (e) {
+    alert("版本太低了...");
   }
-  switch (se_type)
-  {
-    case "id": {
-      return document.getElementById(selec_sub);
-      break;
-    }
-    case "class": {
-      return document.getElementsByClassName(selec_sub)[0];
-      break;
-    }
-    case "attr": {
-      return 0;
-      break;
-    }
-    case "tag" : {
-      return document.getElementsByTagName(selector)[0];
-      break;
-    }
-    default: {
-      return null;
-    }
-  }
-  return null;
 }
 
 // 给一个element绑定一个针对event事件的响应，响应函数为listener
