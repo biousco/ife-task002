@@ -219,17 +219,25 @@ function addEnterEvent(element, listener, bubble) {
 }
 
 function delegateEvent(element, tag, eventName, listener, bubble) {
+  var tag_name = tag.toLowerCase();
+  bubble = bubble || false;
+  var event_handl = function (event) {
+    var e = event || window.event,
+      target = e.srcElement ? e.srcElement : e.target;
+    if (target.nodeName.toLowerCase() == tag_name) {
+      listener(e);
+      return false;
+    }
+  }
   if ('addEventListener' in element) {
-    element.addEventListener(event, function (event) {
-
-    }, bubble);
+    element.addEventListener(eventName, event_handl, bubble);
   } else if ('attachEvent' in element) {
     if (typeof listener == "object" && listener.handleEvent) {
-      element.attachEvent("on" + event, function () {
-        listener.handleEvent.call(listener);
+      element.attachEvent("on" + eventName, function () {
+        listener.handleEvent.call(event_handl);
       })
     } else {
-      element.attachEvent('on', event, listener);
+      element.attachEvent('on', eventName, event_handl);
     }
   }
 }
@@ -238,4 +246,32 @@ $.on = addEvent;
 $.un = removeEvent;
 $.click = addClickEvent;
 $.enter = addEnterEvent;
+$.delegate = delegateEvent;
+
+// 判断是否为IE浏览器，返回-1或者版本号
+function isIE() {
+  // var isIE = !!window.ActiveXObject,
+  // isIE6 = isIE && !window.XMLHttpRequest,
+  // isIE8 = isIE && !!document.documentMode,
+  // isIE7 = isIE && !isIE6 && !isIE8;
+  // if(isIE6 === true) {
+  //   return 6;
+  // } else if (isIE8) {
+  //   return 8;
+  // } else if (isIE7 === true) {
+  //   return 7;
+  // } else return 
+}
+
+// 设置cookie
+function setCookie(cookieName, cookieValue, expiredays) {
+   
+}
+
+// 获取cookie值
+function getCookie(cookieName) {
+   
+}
+
+
 

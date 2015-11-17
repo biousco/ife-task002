@@ -17,43 +17,17 @@
     <div id="addClassName" class="className01"></div>
     <div id="removeClassName" class="className className2"></div>
   </div>
+  
+  <ul id="list">
+    <li>A</li>
+    <li>B</li>
+    <li>C</li>
+    <li>D</li>
+    <li>E</li>
+  </ul>
+  
+  <div id="test01"></div>
   <script src="util.js"></script>
-  <script>
-    function addNum(event) {
-    var val1 = $("#number1").value;
-    var val2 = $("#number2").value;
-    $("#result").innerHTML = parseInt(val1,10) + parseInt(val2,10);
-  }
-  $.on($("#addbtn"),"click",addNum);
-  //   var arr = ['java', 'c', 'php', 'html'];
-  //   function output(item,index) {
-  //     console.log(index + ': ' + item);
-  //   }
-  //   each(arr, output);
-    
-  //   var obj = {
-  //   a: 1,
-  //   b: 2,
-  //   c: {
-  //       c1: 3,
-  //       c2: 4
-  //     }
-  //   };
-  //  console.log(getObjectLength(obj)); // 3
-   
-  //  var email01 = "ssdfsdf@dd.com";
-  //  var email02 = "ldsjflskdjfalkdsf";
-  //  var phone01 = "188194904344";
-  //  var phone02 = "56sdfsddsfsdf";
-  //  var phone03 = "15565234125";
-  //  console.log(isEmail(email01));
-  //  console.log(isEmail(email02));
-  //  console.log(isMobilePhone(phone01),isMobilePhone(phone02),isMobilePhone(phone03));
-   
-  //  addClass($("addClassName"),"addClassName");
-  //  removeClass($("removeClassName"),"className");
-  //  console.log(isSiblingNode($("addClassName"),$("removeClassName")));
-  </script>
   <div id="mocha"></div>
   <script src="./node_modules/mocha/mocha.js"></script>
   <script src="./node_modules/chai/chai.js"></script>

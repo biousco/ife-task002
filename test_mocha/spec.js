@@ -10,6 +10,13 @@ describe("Testing Util", function () {
 	});
 
 	it("Add number", function () {
+		function addNum(event) {
+			var val1 = $("#number1").value;
+			var val2 = $("#number2").value;
+			$("#result").innerHTML = parseInt(val1, 10) + parseInt(val2, 10);
+		}
+		$.on($("#addbtn"), "click", addNum);
+		
 		setText('1', "#number1");
 		setText("1", "#number2");
 		$("#addbtn").click();
@@ -80,7 +87,7 @@ describe("Testing Util", function () {
 		var len = getObjectLength(obj);
 		expect(len).to.eql(3);
 	});
-	
+
 	it("Email&Phone Reg", function () {
 		var email01 = "ssdfsdf@dd.com";
 		var email02 = "ldsjflskdjfalkdsf";
@@ -92,7 +99,33 @@ describe("Testing Util", function () {
 		expect(isMobilePhone(phone01)).to.eql(false);
 		expect(isMobilePhone(phone02)).to.eql(false);
 		expect(isMobilePhone(phone03)).to.eql(true);
-	})
+	});
+
+	it("AddClass", function () {
+		addClass($("#addClassName"), "addClassName");
+		expect($("#addClassName").className).to.eql("className01 addClassName");
+	});
+
+	it("RemoveClass", function () {
+		removeClass($("#removeClassName"), "className");
+		expect($("#removeClassName").className).to.eql("className2");
+	});
+
+	it("DelegateEvent", function () {
+		var clickHandle = function () {
+			$("#test01").innerHTML += event.target.innerHTML;
+		}
+		$.delegate($("#list"), "li", "click", clickHandle);
+		var li_arr = $("#list li");
+		var test_fun = function (item) {
+			console.log(item)
+			item.click();
+		};
+		each(li_arr,test_fun);
+		expect($("#test01").innerHTML).to.eql("ABCDE");
+	});
+
+
 
 
 })
