@@ -1,0 +1,14 @@
+.task {
+  margin: 20px 10px;
+  border: 1px solid #eee;
+  padding: 15px;
+}
+.task .error {
+  color: red;
+  vertical-align: middle;
+}
+
+textarea {
+  vertical-align: middle;
+  resize:none;
+}

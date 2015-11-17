@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Task0002_1</title>
+	<link rel="stylesheet" href="./node_modules/mocha/mocha.css">
+	<link rel="stylesheet" href="./css/task0002_1.css">
+</head>
+
+<body>
+	<div class="task">
+		<h1>第一阶段</h1>
+		<div class="form01">
+			<label for="input01">请输入您的兴趣爱好</label>
+			<input type="text" id="input01">
+			<button id="button01">确定</button>
+		</div>
+		<p>
+			<span class="title">您的爱好有：</span>
+			<span id="intre"></span>
+		</p>
+	</div>
+
+	<div class="task">
+		<h1>第二阶段</h1>
+		<div class="form01">
+			<label for="textarea01">请输入您的兴趣爱好</label>
+			<textarea id="textarea01" cols="30" rows="10"></textarea>
+			<button id="button02">确定</button>
+		</div>
+		<p>
+			<span class="title">您的爱好有：</span>
+			<span id="intre02"></span>
+		</p>
+	</div>
+
+	<div class="task">
+		<h1>第三阶段</h1>
+		<div class="form02">
+			<label for="textarea02">请输入您的兴趣爱好</label>
+			<textarea name="textarea02" id="textarea02" cols="30" rows="10"></textarea>
+			<button id="button03">确定</button>
+			<span id="error" class="error"></span>
+		</div>
+		<p>您的爱好有：</p>
+		<div id="result01"></div>
+	</div>
+
+
+
+
+	<script src="js/util.js"></script>
+	<script src="js/task0002_1.js"></script>
+	<!-- Test -->
+	<div id="mocha"></div>
+	<script src="./node_modules/mocha/mocha.js"></script>
+	<script src="./node_modules/chai/chai.js"></script>
+	<script>
+		mocha.ui('bdd');
+    mocha.reporter('html');
+    var expect = chai.expect;
+	</script>
+	<script src="./js/spec01.js"></script>
+	<script>
+		mocha.run();
+	</script>
+</body>
+
+</html>
