@@ -1,22 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>task002</title>
+  <link rel="stylesheet" href="./node_modules/mocha/mocha.css">
 </head>
+
 <body>
   <input type="text" id="number1">
   <input type="text" id="number2">
   <span id="result"></span>
   <button id="addbtn">添加</button>
-  
+
   <div class="test">
     <div id="addClassName" class="className01"></div>
     <div id="removeClassName" class="className className2"></div>
   </div>
   <script src="util.js"></script>
   <script>
-  function addNum(event) {
+    function addNum(event) {
     var val1 = $("#number1").value;
     var val2 = $("#number2").value;
     $("#result").innerHTML = parseInt(val1,10) + parseInt(val2,10);
@@ -51,5 +54,20 @@
   //  removeClass($("removeClassName"),"className");
   //  console.log(isSiblingNode($("addClassName"),$("removeClassName")));
   </script>
+  <div id="mocha"></div>
+  <script src="./node_modules/mocha/mocha.js"></script>
+  <script src="./node_modules/chai/chai.js"></script>
+  <script>
+    mocha.ui('bdd'); 
+    mocha.reporter('html');
+    var expect = chai.expect;
+
+  </script>
+  <script src="./test_mocha/spec.js"></script>
+  <script>
+    mocha.run();
+
+  </script>
 </body>
+
 </html>
