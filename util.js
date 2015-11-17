@@ -250,28 +250,121 @@ $.delegate = delegateEvent;
 
 // 判断是否为IE浏览器，返回-1或者版本号
 function isIE() {
-  // var isIE = !!window.ActiveXObject,
-  // isIE6 = isIE && !window.XMLHttpRequest,
-  // isIE8 = isIE && !!document.documentMode,
-  // isIE7 = isIE && !isIE6 && !isIE8;
-  // if(isIE6 === true) {
-  //   return 6;
-  // } else if (isIE8) {
-  //   return 8;
-  // } else if (isIE7 === true) {
-  //   return 7;
-  // } else return 
+  var appName = navigator.appName,
+    version = navigator.appVersion.toLowerCase();
+  if (appName !== "Microsoft Internet Explorer") {
+    return -1;
+  }
+  if (version.match(/7./i)[0] == "7.") {
+    return 7;
+  } else if (version.match(/8./i)[0] == "8.") {
+    return 8;
+  } else if (version.match(/6./i)[0] == "6.") {
+    return 6;
+  } else if (version.match(/9./i)[0] == "9.") {
+    return 9;
+  } else if (version.match(/10./i)[0] == "10.") {
+    return 10;
+  } else if (version.match(/11./i)[0] == "11.") {
+    return 11;
+  }
 }
 
 // 设置cookie
 function setCookie(cookieName, cookieValue, expiredays) {
-   
+  var exdate = new Date();
+  exdate.setDate(exdate.getDate() + expiredays);
+  document.cookie = cookieName + "=" + encodeURI(cookieValue) +
+  ((expiredays === null) ? "" : ";expires=" + exdate.toGMTString());
 }
 
 // 获取cookie值
 function getCookie(cookieName) {
-   
+  var _cookie = document.cookie;
+  if (_cookie.length === 0) return "";
+  var arr, reg = new RegExp("(^| )" + cookieName + "=([^;]*)(;|$)");
+  if (arr = _cookie.match(reg))
+    return decodeURI(arr[2]);
+  else
+    return null;
 }
+
+//Ajax
+function ajax(url, options) {
+  var common_fun = function () { };
+  var _type = options.type.toLowerCase() || "get",
+    _url = url || "http://localhost",
+    data = options.data || null,
+    onsuccess = options.success || common_fun,
+    onfail = options.onfail || common_fun;
+
+  var xmlhttp;
+  if (window.XMLHttpRequest) {
+    xmlhttp = new XMLHttpRequest();
+  } else {
+    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+  }
+
+  if (_type === "get" && data !== null) {
+    _url = addQueryParams(_url,data,true);
+    data = null;
+  } else if (_type === "post" && data !== null) {
+    data = addQueryParams("",data,true).substr(1);
+    xmlhttp.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+  }
+  xmlhttp.open(_type, _url, true);
+  xmlhttp.send(data);
+  xmlhttp.onreadystatechange = function () {
+    if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
+      onsuccess();
+    } else if(xmlhttp.status === 404){
+      onfail();
+    }
+  }
+
+}
+
+//url 获得参数
+function get_param (key) {
+  if (window.location.href.indexOf('?') == -1) {
+    return null;
+  }
+  var uri = window.location.href.replace(/^[^\?]*\?/, '');
+
+  var data = {};
+  var pairs = uri.split('&');
+  for (var k in pairs) {
+    if (typeof (pairs[k]) == 'string') {
+      var k_v_arr = pairs[k].split('=');
+      if (k_v_arr.length) {
+        data[k_v_arr[0]] = k_v_arr[1] || '';
+      }
+    }
+  }
+
+  if (key in data) {
+    return data[key];
+  }
+
+  return null;
+};
+
+//url添加参数
+function addQueryParams (url, obj, isencode) {
+  var key,
+    joinChar = (url.indexOf("?") === -1) ? '?' : '&',
+    params = [],
+    strParams = '';
+  for (key in obj) {
+    params[params.length] = '&' + key + '=' + obj[key];
+  }
+  strParams = params.join("").substring(1);
+  if (isencode === true) {
+    return encodeURIComponent(url + joinChar + strParams);
+  } else {
+    return url + joinChar + strParams;
+  }
+};
 
 
 

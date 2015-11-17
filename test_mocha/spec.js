@@ -6,7 +6,7 @@ describe("Testing Util", function () {
 	};
 
 	before(function () {
-
+		document.cookie = "";
 	});
 
 	it("Add number", function () {
@@ -118,12 +118,18 @@ describe("Testing Util", function () {
 		$.delegate($("#list"), "li", "click", clickHandle);
 		var li_arr = $("#list li");
 		var test_fun = function (item) {
-			console.log(item)
 			item.click();
 		};
 		each(li_arr,test_fun);
 		expect($("#test01").innerHTML).to.eql("ABCDE");
 	});
+	
+	it("SetCookie&GetCookie", function () {
+		setCookie("Test01","123456789");
+		expect(document.cookie).to.contain("Test01=123456789");
+		var val = getCookie("Test01");
+		expect(val).to.eql("123456789");
+	})
 
 
 
