@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Task0002_1</title>
+	<link rel="stylesheet" href="./node_modules/mocha/mocha.css">
+	<link rel="stylesheet" href="./css/task0002_1.css">
+</head>
+
+<body>
+	<div class="task02">
+		<h1>倒计时</h1>
+		<input type="text" id="time">
+		<button id="confirm">确定</button>
+		<p>按照格式YYYY-MM-DD输入年月日</p>
+		<p class="desc">
+			距离<span id="target_time"></span>还有<span id="last_time"></span>
+		</p>
+	</div>
+
+
+
+
+
+	<script src="js/util.js"></script>
+	<script src="js/task0002_2.js"></script>
+	<!-- Test -->
+	<div id="mocha"></div>
+	<script src="./node_modules/mocha/mocha.js"></script>
+	<script src="./node_modules/chai/chai.js"></script>
+	<script>
+		mocha.ui('bdd');
+    mocha.reporter('html');
+    var expect = chai.expect;
+	</script>
+	<script src="./js/spec02.js"></script>
+	<script>
+		mocha.run();
+	</script>
+</body>
+
+</html>

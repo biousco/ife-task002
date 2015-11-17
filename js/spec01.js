@@ -131,4 +131,19 @@ describe("Testing Task02-3", function () {
 		expect($("input[name=intres]").length).to.eql(0);
 		expect($("label[name=intres]")[0]).to.eql(undefined);
 	});
+
+	it("Append same Item", function () {
+		$input.value = "222,222";
+		$button.click();
+		expect($error_text.innerHTML).to.eql("");
+		expect($("input[name=intres]").length).to.eql(1);
+		expect($("label[name=intres]")[0].innerHTML).to.eql("222");
+
+		$input.value += " 111;111";
+		$button.click();
+		expect($error_text.innerHTML).to.eql("");
+		expect($("input[name=intres]").length).to.eql(2);
+		expect($("label[name=intres]")[0].innerHTML).to.eql("222");
+		expect($("label[name=intres]")[1].innerHTML).to.eql("111");
+	});
 })
