@@ -17,7 +17,9 @@
 }
 .task02 .desc {
   font-size: 20px;
-
+}
+.task02 .tips {
+  color: red;
 }
 
 textarea {
